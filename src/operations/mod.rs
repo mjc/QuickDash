@@ -134,7 +134,7 @@ fn optimize_file_order(_dirs: &mut [DirEntry]) {}
 
 /// Serialise the specified hashes to the specified output file.
 pub fn write_hashes(out_file: &Path, algo: Algorithm, mut hashes: BTreeMap<String, String>) -> i32 {
-	let file = File::create(&out_file).unwrap();
+	let file = File::create(out_file).unwrap();
 	let mut out = TabWriter::new(file);
 
 	hashes.insert(
@@ -154,7 +154,7 @@ pub fn write_hashes(out_file: &Path, algo: Algorithm, mut hashes: BTreeMap<Strin
 pub fn read_hashes(file: &Path) -> Result<BTreeMap<String, String>, Error> {
 	let mut hashes = BTreeMap::new();
 
-	let in_file = BufReader::new(File::open(&file).unwrap());
+	let in_file = BufReader::new(File::open(file).unwrap());
 	for line in in_file.lines().map(Result::unwrap) {
 		try_contains(&line, &mut hashes)?;
 	}
